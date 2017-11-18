@@ -1,0 +1,6 @@
+Welcome to the framework!
+This program is mainfully for CyberPatriot use, but compatible with any linux operating system.
+The command "help" is used to list all modules and commands.
+If you have any concerns/questions about the program please message the developer.
+This program is best used with the full dimensions of your screen.
+Enjoy your time in the framework!

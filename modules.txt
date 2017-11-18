@@ -1,0 +1,5 @@
+Modules/Commands:
+1. help - used to list modules/commands
+2. exit - used to completely exit the framework
+3. restart - restarts the framework
+4. linuxcmds - Lists all commands related to CyberPatriot

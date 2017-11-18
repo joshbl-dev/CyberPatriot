@@ -1,17 +1,18 @@
 import os
 
-def  installEssentials():
+def installEssentials():
     os.system("sudo apt-get update")
     os.system("sudo apt-get upgrade")
     os.system("sudo apt-get install firefox")
     os.system("sudo apt-get install gedit")
     os.system("sudo apt-get install clamtk")
+
 def removeUnauthorizedUsers(user):
     os.system("sudo deluser " + user)
 
 def removeAdmin(user):
     print("Remove non-admins from admin group")
-    os.system("sudo /etc/group")
+    os.system("sudo gedit /etc/group")
 
 def createUsers(user):
     os.system("sudo adduser" + user)
@@ -41,10 +42,12 @@ def enableFirewall():
     os.system("sudo nfw enable")
 
 def allowPort(port):
-    pass
+    print("Enter a port: ", end="")
+    port = input()
 
 def denyPort(port):
-    pass
+    print("Enter a port: ", end="")
+    port = input()
 
 def automaticUpdates():
     print("settings > Software & Updates > Updates > Automatically check for updates: daily")
@@ -71,21 +74,3 @@ def sudoers():
 def findMediaFiles():
     os.system("cd /home")
     os.system("sudo locate '.mp3'")
-
-def main():
-    os.system("gksudo")
-    removeUnauthorizedUsers()
-    removeAdmin()
-    createUsers()
-    changeRootPass()
-    disableGuestAccount()
-    enableFirewall()
-    allowPort()
-    denyPort()
-    automaticUpdates()
-    securityUpdates()
-    updateAll()
-    disableSSHRootLogin()
-
-if __name__ == '__main__':
-    main()
