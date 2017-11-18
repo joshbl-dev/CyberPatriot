@@ -2,6 +2,7 @@ from __future__ import print_function
 import os
 import time
 import random as r
+import LinuxScript
 
 def startup():
     colors = ["31", "32", "33", "34", "35", "36", "91", "92", "93", "94", "95", "96", "97", "30", "39"]
@@ -17,11 +18,9 @@ def startup():
     for line in textfile.readlines():
         character = list(line)
         for i in range(len(character)):
-            time.sleep(0.01)
             charColor = colors[r.randrange(0, 15)]
-            # if i % 10 == 0:
-            # subprocess.Popen(charColor, shell=True)
             print("\033[" + charColor + "m" + character[i], end="")
+
 
 
 def command():
