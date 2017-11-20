@@ -8,15 +8,18 @@ def clearScreen():
         subprocess.Popen("clear", shell=True)
 
 def frameworkStartup():
-    colors = ["31","34", "35", "36", "91","94", "95", "96", "97", "39"]
+    colors = ["}","/", "\\", "|","38;5;39", "37"]
     clearScreen()
     # prints Cyber Patriot to console
     textfile = open("CyberPatriot.txt", "r")
     for line in textfile.readlines():
         character = list(line)
         for i in range(len(character)):
-            charColor = colors[r.randrange(0, len(colors))]
-            print("\033[" + charColor + "m" + character[i], end="")
+            if character[i] in colors:
+                charColor = colors[4]
+            else:
+                charColor = colors[5]
+            print("\033[" + charColor + "m" + character[i], end="", flush=True)
             time.sleep(0.005)
     print()
 
@@ -66,8 +69,8 @@ def main():
     os.system("pause")
     clearScreen()
     print("Initializing in...")
-    for i in range(5):
-        print(5 - i)
+    for i in range(3):
+        print(3 -  i)
         time.sleep(1)
     frameworkStartup()
     while True:
