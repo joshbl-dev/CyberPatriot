@@ -1,5 +1,6 @@
 from __future__ import print_function
-import os, sys, time, random as r, subprocess, LinuxScript
+from passlib.hash import pbkdf2_sha256
+import os, sys, time, subprocess, LinuxScript, getpass
 
 def clearScreen():
     if os.name == 'nt':
@@ -8,22 +9,23 @@ def clearScreen():
         subprocess.Popen("clear", shell=True)
 
 def frameworkStartup():
-    colors = ["}","/", "\\", "|","38;5;39", "37"]
+    symbols = ["}","/", "\\", "|"]
+    colors = ["38;5;39", "37"]#[cyan, white,]
     clearScreen()
     # prints Cyber Patriot to console
     textfile = open("CyberPatriot.txt", "r")
     for line in textfile.readlines():
         character = list(line)
         for i in range(len(character)):
-            if character[i] in colors:
-                charColor = colors[4]
+            if character[i] in symbols:
+                charColor = colors[0]
             else:
-                charColor = colors[5]
+                charColor = colors[1]
             print("\033[" + charColor + "m" + character[i], end="", flush=True)
             time.sleep(0.005)
     print()
 
-def command():
+def enterCommand():
     # Wait for command
     time.sleep(1)
     print("\n\n"+"\033[39m"+"Command: ", end="")
@@ -58,23 +60,42 @@ def doCommand(command):
     else:
         print("That is not a valid command. Please contact the developer for any questions/concerns.")
 
-
+def verify():
+    count = 0
+    status = True
+    while (count <4):
+        if status == False:
+            print("Invalid Password")
+        file = open("passwords.txt", "r")
+        hashes = file.readlines()
+        password = getpass.getpass()
+        for i in range(len(hashes)):
+            status = pbkdf2_sha256.verify(password, hashes[i].strip())
+            if status:
+                print("Accepted.")
+                count = 999
+                break
+        count += 1
+        if count == 3:
+            print("Password limit reached. Goodbye.")
+            exit(1)
 
 def main():
     os.system("title CyberPatriot Framework")
     clearScreen()
     info = open("info.txt", "r")
     for line in info.readlines():
-        print(line)
+        print("\033[39m" + line)
     os.system("pause")
     clearScreen()
+    verify()
     print("Initializing in...")
     for i in range(3):
         print(3 -  i)
         time.sleep(1)
     frameworkStartup()
     while True:
-        action = command()
+        action = enterCommand()
         status = doCommand(action)
         if status == False:
             break
